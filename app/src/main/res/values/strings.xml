@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">YummySpends</string>
+    <string name="total_spend">Total: %1$d</string>
+</resources>

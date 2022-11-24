@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tl_spendings_single_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
+    android:stretchColumns="0,1,2"
+    android:weightSum="1">
+
+    <TableRow
+        android:id="@+id/tr_single_spending_line"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp">
+
+        <TextView
+            android:id="@+id/tv_single_spending_name"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:hint="Название"
+            android:padding="3dip" />
+
+        <TextView
+            android:id="@+id/tv_single_spending_price"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:hint="стоимость"
+            android:padding="3dip" />
+
+        <TextView
+            android:id="@+id/tv_single_spending_category"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:hint="категория"
+            android:padding="3dip" />
+    </TableRow>
+</TableLayout>

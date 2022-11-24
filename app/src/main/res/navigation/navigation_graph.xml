@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.dsheal.yummyspends.presentation.ui.fragments.AllSpendingsFieldFragment"
+        tools:layout="@layout/fragment_all_spends">
+
+        <action
+            android:id="@+id/toAddNewSpending"
+            app:destination="@id/addNewSpending" />
+
+        <argument
+            android:name="spending"
+            app:argType="com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel" />
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addNewSpending"
+        android:name="com.dsheal.yummyspends.presentation.ui.fragments.AddNewSpendingFragment"
+        tools:layout="@layout/fragment_add_new_spending">
+
+        <action
+            android:id="@+id/toHomeFragment"
+            app:destination="@id/homeFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.dsheal.yummyspends.presentation.ui.fragments.SpendingsHistoryFragment"
+        tools:layout="@layout/fragment_history"></fragment>
+
+    <fragment
+        android:id="@+id/analyitcsFragment"
+        android:name="com.dsheal.yummyspends.presentation.ui.fragments.SpendingsAnalyticsFragment"
+        tools:layout="@layout/fragment_analytics"></fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.dsheal.yummyspends.presentation.ui.fragments.UserProfileFragment"
+        tools:layout="@layout/fragment_profile"></fragment>
+
+</navigation>
