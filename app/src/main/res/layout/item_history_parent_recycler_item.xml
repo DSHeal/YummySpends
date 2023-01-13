@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:id="@+id/tl_category_title_and_sum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:stretchColumns="0,1"
+        android:weightSum="1"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/tr_history_spending_line"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/tv_history_category_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:hint="Овощи"
+                android:padding="3dip" />
+
+            <TextView
+                android:id="@+id/tv_history_category_sum"
+                android:layout_width="0dp"
+                android:layout_column="1"
+                android:layout_gravity="start"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:hint="234"
+                android:padding="3dip" />
+
+        </TableRow>
+    </TableLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history_child_category_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tl_category_title_and_sum"
+        tools:listitem="@layout/item_history_category_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

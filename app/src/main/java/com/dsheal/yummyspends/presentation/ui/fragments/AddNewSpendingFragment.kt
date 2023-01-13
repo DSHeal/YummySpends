@@ -62,7 +62,7 @@ class AddNewSpendingFragment : BaseFragment() {
 
 
         val date = Date()
-        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ROOT)
+        val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
         val currentDate = formatter.format(date)
 
         binding.btnAddSingleNewSpending.setOnClickListener {

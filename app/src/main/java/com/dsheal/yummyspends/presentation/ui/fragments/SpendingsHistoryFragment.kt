@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.dsheal.yummyspends.R
-import com.dsheal.yummyspends.databinding.FragmentAllSpendsBinding
+import androidx.viewpager2.widget.ViewPager2
 import com.dsheal.yummyspends.databinding.FragmentHistoryBinding
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
-import com.dsheal.yummyspends.presentation.adapters.SpendingsListAdapter
+import com.dsheal.yummyspends.presentation.adapters.HistoryViewPagerAdapter
 import com.dsheal.yummyspends.presentation.base.BaseViewModel
 import com.dsheal.yummyspends.presentation.viewmodels.AllSpendingsFieldViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +19,8 @@ class SpendingsHistoryFragment : BaseFragment()  {
 
     private var mBinding: FragmentHistoryBinding? = null
     private val binding get() = mBinding!!
+    private lateinit var vpAdapter: HistoryViewPagerAdapter
+    private lateinit var viewPager: ViewPager2
 
     private var spendingLiveData = MutableLiveData<BaseViewModel.State<List<SingleSpendingModel>>>()
 
@@ -57,13 +56,14 @@ class SpendingsHistoryFragment : BaseFragment()  {
     }
 
     fun initViews() {
-        binding.rvHistorySpends.apply {
-            adapter = SpendingsListAdapter()
-            layoutManager = LinearLayoutManager(requireContext())
-        }
     }
 
     fun onDataFetched(data: List<SingleSpendingModel>) {
-        (binding.rvHistorySpends.adapter as SpendingsListAdapter).updateList(data)
+        viewPager = binding.vpSpendHistory
+        binding.vpSpendHistory.adapter = HistoryViewPagerAdapter(this, data)
+//        viewPager.setOnScrollChangeListener(object : RecyclerView.OnScrollListener() {
+//
+//        })
     }
+
 }

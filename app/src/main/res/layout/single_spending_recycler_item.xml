@@ -1,37 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tl_spendings_single_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="1dp"
-    android:stretchColumns="0,1,2"
-    android:weightSum="1">
+    android:layout_marginTop="1dp">
 
-    <TableRow
-        android:id="@+id/tr_single_spending_line"
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp">
+        android:stretchColumns="0,1,2"
+        android:weightSum="1">
 
-        <TextView
-            android:id="@+id/tv_single_spending_name"
-            android:layout_gravity="start"
-            android:gravity="start"
-            android:hint="Название"
-            android:padding="3dip" />
+        <TableRow
+            android:id="@+id/tr_single_spending_line"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_single_spending_price"
-            android:layout_gravity="start"
-            android:gravity="start"
-            android:hint="стоимость"
-            android:padding="3dip" />
+            <TextView
+                android:id="@+id/tv_single_spending_name"
+                style="@style/TableRowItem"
+                android:layout_width="0dp"
+                android:layout_column="0"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:hint="Название"
+                android:padding="3dip"
+                android:textAlignment="textStart" />
 
-        <TextView
-            android:id="@+id/tv_single_spending_category"
-            android:layout_gravity="start"
-            android:gravity="start"
-            android:hint="категория"
-            android:padding="3dip" />
-    </TableRow>
-</TableLayout>
+            <TextView
+                android:id="@+id/tv_single_spending_price"
+                style="@style/TableRowItem"
+                android:layout_width="0dp"
+                android:layout_column="1"
+                android:layout_margin="1dp"
+                android:layout_weight="0.5"
+                android:hint="стоимость"
+                android:padding="3dip"
+                android:textAlignment="textStart" />
+
+            <TextView
+                android:id="@+id/tv_single_spending_category"
+                style="@style/TableRowItem"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:hint="категория"
+                android:padding="3dip"
+                android:textAlignment="textStart" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

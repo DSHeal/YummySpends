@@ -8,12 +8,15 @@ import com.dsheal.yummyspends.R
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.dsheal.yummyspends.databinding.FragmentAllSpendsBinding
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.presentation.adapters.SpendingsListAdapter
 import com.dsheal.yummyspends.presentation.base.BaseViewModel
 import com.dsheal.yummyspends.presentation.viewmodels.AllSpendingsFieldViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +30,6 @@ class AllSpendingsFieldFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        observe(allSpendingsFieldViewModel.events, ::onEvent)
 
         initViews()
         allSpendingsFieldViewModel.listenAllSpendingsFromDb()
@@ -65,6 +67,10 @@ class AllSpendingsFieldFragment : BaseFragment() {
             findNavController().navigate(AllSpendingsFieldFragmentDirections.actionHomeFragmentToHistoryFragment())
 
         }
+
+        binding.btnClearTable.setOnClickListener {
+            allSpendingsFieldViewModel.deleteAllSpendingsFromDb()
+        }
         binding.rvSpendingsList.apply {
             adapter = SpendingsListAdapter()
             layoutManager = LinearLayoutManager(requireContext())
@@ -73,17 +79,61 @@ class AllSpendingsFieldFragment : BaseFragment() {
 
     fun onDataFetched(data: List<SingleSpendingModel>) {
         if (data.isEmpty()) {
-            binding.clTitlesContainer.visibility = View.GONE
+            binding.tlTableHeadingLayout.visibility = View.GONE
             binding.tvPleaseAddHere.visibility = View.VISIBLE
+            binding.tvTotalForSpendList.visibility = View.GONE
+            binding.btnClearTable.visibility = View.GONE
         } else {
-            binding.clTitlesContainer.visibility = View.VISIBLE
+            binding.tlTableHeadingLayout.visibility = View.VISIBLE
             binding.tvPleaseAddHere.visibility = View.GONE
+            binding.tvTotalForSpendList.visibility = View.VISIBLE
+            binding.btnClearTable.visibility = View.VISIBLE
         }
         (binding.rvSpendingsList.adapter as SpendingsListAdapter).updateList(data)
         val allPricesList = mutableListOf<Int>()
-            data.forEach { spend ->
+        data.forEach { spend ->
             allPricesList.add(spend.spendingPrice)
         }
         binding.tvTotalForSpendList.text = getString(R.string.total_spend, allPricesList.sum())
+
+        val spendsArrayList = data as ArrayList
+
+//        (binding.rvSpendingsList.adapter as SpendingsListAdapter).notifyDataSetChanged()
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val deletedItem: SingleSpendingModel =
+                    spendsArrayList[viewHolder.absoluteAdapterPosition]
+                val position = viewHolder.absoluteAdapterPosition
+                spendsArrayList.removeAt(viewHolder.absoluteAdapterPosition)
+                (binding.rvSpendingsList.adapter as SpendingsListAdapter).notifyItemRemoved(
+                    viewHolder.absoluteAdapterPosition
+                )
+                (binding.rvSpendingsList.adapter as SpendingsListAdapter).notifyItemRangeChanged(
+                    position,
+                    spendsArrayList.size
+                )
+                view
+                Snackbar.make(
+                    binding.rvSpendingsList,
+                    "Deleted " + deletedItem.spendingName,
+                    Snackbar.LENGTH_LONG
+                )
+                    .setAction("Undo", View.OnClickListener {
+                        spendsArrayList.add(position, deletedItem)
+                        (binding.rvSpendingsList.adapter as SpendingsListAdapter).notifyItemInserted(
+                            position
+                        )
+                    }).show()
+            }
+        }).attachToRecyclerView(binding.rvSpendingsList)
+
     }
 }

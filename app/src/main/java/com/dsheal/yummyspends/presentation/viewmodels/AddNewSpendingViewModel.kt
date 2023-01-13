@@ -35,10 +35,10 @@ class AddNewSpendingViewModel @Inject constructor(
         }) {
             spendingsRepository.saveSpendingsInDatabase(
                 SingleSpendingModel(
-                    spendTitle,
-                    spendCost,
-                    spendCategory,
-                    currentDate
+                    spendingName = spendTitle,
+                    spendingPrice = spendCost,
+                    spendingCategory = spendCategory,
+                    purchaseDate = currentDate
                 )
             )
         }

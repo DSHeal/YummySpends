@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">YummySpends</string>
     <string name="total_spend">Total: %1$d</string>
+    <string name="category_title">Category</string>
+    <string name="price_title">Price</string>
+    <string name="title_title">Title</string>
+    <string name="history_total_for_the_day">Total for the day: %1$d</string>
 </resources>

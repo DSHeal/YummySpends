@@ -1,5 +1,6 @@
 package com.dsheal.yummyspends.presentation.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
@@ -21,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         NavigationUI.setupWithNavController(
             binding.bottomNavView,
-            (supportFragmentManager.findFragmentById(R.id.fr_container_view) as NavHostFragment).navController)
+            (supportFragmentManager.findFragmentById(R.id.fr_container_view) as NavHostFragment).navController
+        )
         val mainViewModel = MainViewModel()
         setContentView(binding.root)
     }
@@ -34,4 +36,15 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        val profileDeepLink = intent?.data?.getQueryParameter("p") ?: ""
+
+        if (intent?.action != null && profileDeepLink.isNotEmpty()) {
+        } else {
+            //analytics here
+        }
+
+    }
 }

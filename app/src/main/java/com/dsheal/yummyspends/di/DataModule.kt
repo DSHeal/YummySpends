@@ -6,6 +6,8 @@ import com.dsheal.yummyspends.common.Constants
 import com.dsheal.yummyspends.data.database.AppDatabase
 import com.dsheal.yummyspends.data.database.spendings.SpendingsDao
 import com.dsheal.yummyspends.data.repositories.SpendinsRepositoryImpl
+import com.dsheal.yummyspends.domain.interactors.RemoteConfigInteractor
+import com.dsheal.yummyspends.domain.interactors.RemoteConfigInteractorImpl
 import com.dsheal.yummyspends.domain.repositories.SpendingsRepository
 import dagger.Module
 import dagger.Provides
@@ -34,4 +36,8 @@ class DataModule {
     fun providependingsDao(spendingsDatabase: AppDatabase): SpendingsDao {
         return spendingsDatabase.spendingsDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideRemoteConfig(): RemoteConfigInteractor = RemoteConfigInteractorImpl()
 }

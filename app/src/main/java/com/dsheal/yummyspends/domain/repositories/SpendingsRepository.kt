@@ -8,4 +8,6 @@ interface SpendingsRepository {
 
     fun listenSpendingsListFromDatabase(): List<SingleSpendingModel>
 
+    fun deleteAllSpendingsFromDB()
+
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:stretchColumns="0,1"
+    android:weightSum="1">
+
+    <TableRow
+        android:id="@+id/tr_history_spending_line"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp">
+
+        <TextView
+            android:id="@+id/tv_history_category_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:hint="Овощи"
+            android:padding="3dip" />
+
+        <TextView
+            android:id="@+id/tv_history_category_sum"
+            android:layout_width="0dp"
+            android:layout_column="1"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:hint="234"
+            android:padding="3dip" />
+
+    </TableRow>
+</TableLayout>
