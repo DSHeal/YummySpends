@@ -25,16 +25,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_all_my_spendings" />
 
-    <TextView
-        android:id="@+id/tv_history_announcement"
+    <ImageView
+        android:id="@+id/iv_calendar_arrow_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="248dp"
-        android:gravity="center"
-        android:text="Раздел в разработке.\nСкоро здесь будет история покупок"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_baseline_arrow_right_24"
+        app:layout_constraintEnd_toEndOf="@+id/vp_spend_history"
+        app:layout_constraintTop_toTopOf="@+id/vp_spend_history" />
+
+    <ImageView
+        android:id="@+id/iv_calendar_arrow_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_baseline_arrow_left_24"
+        app:layout_constraintStart_toStartOf="@+id/vp_spend_history"
+        app:layout_constraintTop_toTopOf="@+id/vp_spend_history" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

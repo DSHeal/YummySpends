@@ -10,4 +10,6 @@ interface SpendingsRepository {
 
     fun deleteAllSpendingsFromDB()
 
+    fun listenSpendingsByDate(date: String): List<SingleSpendingModel>
+
 }

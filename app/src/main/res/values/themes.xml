@@ -28,7 +28,7 @@
     </style>
 
     <style name="SubtleButton" parent="Widget.MaterialComponents.Button.TextButton">
-<!--        <item name="android:background">@drawable/bcg_subtle_button</item>-->
+        <!--        <item name="android:background">@drawable/bcg_subtle_button</item>-->
         <item name="android:backgroundTint">@color/c_E5E6F2</item>
 
         <item name="android:textColor">@color/c_B2B4E8</item>
@@ -39,15 +39,22 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="HistoryTableHeader" parent="TableHeader">
+        <item name="android:background">@drawable/bcg_coffee_light_not_rounded</item>
+    </style>
+
+    <style name="HistoryTableRowItem" parent="TableRowItem">
+        <item name="android:background">@drawable/bcg_outlined_light_grey_not_rounded</item>
+    </style>
+
     <style name="TableRowItem" parent="@android:style/TextAppearance.Small">
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/bcg_outlined_light_grey_rounded_8</item>
         <item name="android:layout_marginEnd">1dp</item>
         <item name="android:paddingStart">10dp</item>
         <item name="android:paddingEnd">1dp</item>
-
-        <item name="android:layout_height">40dp</item>
     </style>
 
     <style name="TableHeader" parent="@android:style/TextAppearance.Small">
@@ -58,7 +65,5 @@
         <item name="android:background">@drawable/bcg_rounded_8_coffee_light</item>
         <item name="android:layout_marginEnd">1dp</item>
         <item name="android:paddingStart">10dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">30dp</item>
     </style>
 </resources>

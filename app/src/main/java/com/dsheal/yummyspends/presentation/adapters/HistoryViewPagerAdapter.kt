@@ -4,23 +4,31 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.presentation.ui.fragments.HistoryViewPagerContainerFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HistoryViewPagerAdapter(
     fragment: Fragment, private val spends: List<SingleSpendingModel>
 ) : FragmentStateAdapter(fragment) {
 
+    val formatter = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+    val calendar = Calendar.getInstance()
+
     override fun getItemCount(): Int {
-        return 3
+        return getDaysInAYear()
+    }
+
+    fun getDaysInAYear(): Int {
+        calendar.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR))
+        calendar.set(Calendar.MONTH, Calendar.DECEMBER)
+        calendar.set(Calendar.DATE, 31)
+        return calendar.get(Calendar.DAY_OF_YEAR)
     }
 
     override fun createFragment(position: Int): Fragment {
-        when (position) {
+        val mCalendar = Calendar.getInstance()
+        mCalendar.set(Calendar.DAY_OF_YEAR, position)
 
-//            0 -> { }
-            1 -> return HistoryViewPagerContainerFragment.newInstance(spends[0].purchaseDate)
-//            2 -> {}
-        }
-        return HistoryViewPagerContainerFragment.newInstance(if (spends.isEmpty()) "" else spends[0].purchaseDate)
+        return HistoryViewPagerContainerFragment.newInstance(formatter.format(mCalendar.time))
     }
-
 }

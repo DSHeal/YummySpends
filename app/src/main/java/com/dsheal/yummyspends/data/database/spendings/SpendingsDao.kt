@@ -26,6 +26,9 @@ abstract class SpendingsDao {
     @Query(QUERY_DELETE_ALL_SPENDINGS)
     abstract fun deleteSpendingsTable()
 
+    @Query(QUERY_GET_SPENDINGS_BY_DATE)
+    abstract fun getSpendingsByDate(date: String): List<SpendingsEntity>
+
     companion object {
         private const val QUERY_SPENDING_BY_ID = """
             SELECT *
@@ -48,6 +51,12 @@ abstract class SpendingsDao {
                 DELETE
                 FROM ${SpendingsEntity.TABLE_NAME}
                 """
+
+        private const val QUERY_GET_SPENDINGS_BY_DATE = """
+            SELECT * 
+            FROM ${SpendingsEntity.TABLE_NAME} 
+            WHERE ${SpendingsEntity.COLUMN_PURCHASE_DATE} = :date
+        """
     }
 
     //может, добавить еще одну таблицу по категориям?

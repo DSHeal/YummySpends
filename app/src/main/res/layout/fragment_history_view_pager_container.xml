@@ -14,7 +14,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleMargins="20dp" />
 
-
     <TextView
         android:id="@+id/tv_total_sum_for_day"
         android:layout_width="wrap_content"
@@ -22,7 +21,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/bcg_subtle_button"
+        android:background="@drawable/bcg_subtle_button_rounded_6"
         android:padding="8dp"
         android:text="345"
         android:textColor="@color/black"
@@ -31,7 +30,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_history_current_date"
         tools:textAllCaps="true" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_history_list"

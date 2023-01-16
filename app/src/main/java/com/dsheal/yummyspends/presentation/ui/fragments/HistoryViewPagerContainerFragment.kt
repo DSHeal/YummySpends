@@ -51,25 +51,27 @@ class HistoryViewPagerContainerFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dateForHeader = arguments?.getString(DATE) ?: ""
-        binding.tbHistoryCurrentDate.title = dateForHeader
-        binding.tbHistoryCurrentDate.setTitleMargin(220, 20, 20, 20)
+        with(binding) {
+            dateForHeader = arguments?.getString(DATE) ?: ""
+            tbHistoryCurrentDate.title = dateForHeader
+            tbHistoryCurrentDate.setTitleMargin(250, 20, 20, 20)
 
-        val recycler = binding.rvHistoryList
-        recycler.apply {
-            adapter = HistoryListAdapter()
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+            val recycler = rvHistoryList
+            recycler.apply {
+                adapter = HistoryListAdapter()
+                layoutManager = LinearLayoutManager(requireContext())
+            }
 
-        viewModel.listenAllSpendingsFromDb()
-        viewModel.spending.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is BaseViewModel.State.Loading -> {}
-                is BaseViewModel.State.Failure -> {
-                    showAlert(state.error.message)
-                }
-                is BaseViewModel.State.Success -> {
-                    onDataFetched(state.data)
+            viewModel.listenSpendingsByDate(dateForHeader!!)
+            viewModel.spending.observe(viewLifecycleOwner) { state ->
+                when (state) {
+                    is BaseViewModel.State.Loading -> {}
+                    is BaseViewModel.State.Failure -> {
+                        showAlert(state.error.message)
+                    }
+                    is BaseViewModel.State.Success -> {
+                        onDataFetched(state.data)
+                    }
                 }
             }
         }
@@ -95,12 +97,12 @@ class HistoryViewPagerContainerFragment : BaseFragment() {
             spending.spendingCategory
         }
 
-        for(i in groupedList.keys){
-            for(v in groupedList.getValue(i)){
-                categoryPrice+=v.spendingPrice
+        for (i in groupedList.keys) {
+            for (v in groupedList.getValue(i)) {
+                categoryPrice += v.spendingPrice
             }
             finalList.add(HistoryDataWrapper.CategoryTableTitle(i, categoryPrice))
-            for(v in groupedList.getValue(i)){
+            for (v in groupedList.getValue(i)) {
                 finalList.add(HistoryDataWrapper.CategoryTableItem(v.spendingName, v.spendingPrice))
             }
             categoryPrice = 0

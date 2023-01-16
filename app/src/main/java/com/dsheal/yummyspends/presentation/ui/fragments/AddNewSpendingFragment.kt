@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.dsheal.yummyspends.databinding.FragmentAddNewSpendingBinding
 import com.dsheal.yummyspends.presentation.base.BaseViewModel
-import com.dsheal.yummyspends.presentation.viewmodels.AddNewSpendingViewModel
 import com.dsheal.yummyspends.presentation.viewmodels.AllSpendingsFieldViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -69,11 +68,12 @@ class AddNewSpendingFragment : BaseFragment() {
             val spendTitle = binding.etSingleSpendingName.text.toString()
             val spendCost = binding.etSingleSpendingPrice.text.toString()
             val spendCategory = binding.tvSingleSpendingCategory.text.toString()
+            val customerDate = binding.tvSpendingDate.text.toString()
             addNewSpendingViewModel.saveSpendingInDb(
                 spendTitle,
                 spendCost.toInt(),
                 spendCategory,
-                currentDate.toString()
+                if (customerDate == "today") currentDate.toString() else customerDate
             )
 
             findNavController().popBackStack()

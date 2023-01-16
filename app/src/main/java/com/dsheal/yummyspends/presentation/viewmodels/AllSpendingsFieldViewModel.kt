@@ -30,6 +30,14 @@ class AllSpendingsFieldViewModel @Inject constructor(
         }
     }
 
+    fun listenSpendingsByDate(date: String) {
+        viewModelScope.launch (Dispatchers.IO + CoroutineExceptionHandler{ _, throwable ->
+            spendingLiveData.postValue(State.Failure(throwable))
+        }) {
+            spendingLiveData.postValue(State.Success(spendingsRepository.listenSpendingsByDate(date)))
+        }
+    }
+
     fun saveSpendingInDb(
         spendTitle: String,
         spendCost: Int,

@@ -13,9 +13,12 @@ import com.dsheal.yummyspends.presentation.adapters.HistoryViewPagerAdapter
 import com.dsheal.yummyspends.presentation.base.BaseViewModel
 import com.dsheal.yummyspends.presentation.viewmodels.AllSpendingsFieldViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.abs
 
 @AndroidEntryPoint
-class SpendingsHistoryFragment : BaseFragment()  {
+class SpendingsHistoryFragment : BaseFragment() {
 
     private var mBinding: FragmentHistoryBinding? = null
     private val binding get() = mBinding!!
@@ -41,7 +44,6 @@ class SpendingsHistoryFragment : BaseFragment()  {
         super.onViewCreated(view, savedInstanceState)
         viewModel.listenAllSpendingsFromDb()
 
-        initViews()
         viewModel.spending.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is BaseViewModel.State.Loading -> {}
@@ -55,15 +57,23 @@ class SpendingsHistoryFragment : BaseFragment()  {
         }
     }
 
-    fun initViews() {
-    }
-
     fun onDataFetched(data: List<SingleSpendingModel>) {
+        val calendar = Calendar.getInstance()
+        val today = calendar.get(Calendar.DAY_OF_YEAR)
+
         viewPager = binding.vpSpendHistory
         binding.vpSpendHistory.adapter = HistoryViewPagerAdapter(this, data)
-//        viewPager.setOnScrollChangeListener(object : RecyclerView.OnScrollListener() {
-//
-//        })
-    }
+        viewPager.setCurrentItem(today, false)
 
+        with(binding) {
+            ivCalendarArrowRight.setOnClickListener {
+                viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+                viewPager.adapter?.notifyItemChanged(viewPager.currentItem + 1)
+            }
+            ivCalendarArrowLeft.setOnClickListener {
+                viewPager.setCurrentItem(viewPager.currentItem - 1, true)
+                viewPager.adapter?.notifyItemChanged(viewPager.currentItem + 1)
+            }
+        }
+    }
 }

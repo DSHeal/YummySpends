@@ -22,6 +22,8 @@ class SpendinsRepositoryImpl @Inject constructor(
     override fun deleteAllSpendingsFromDB() {
         database.spendingsDao().deleteSpendingsTable()
     }
-    //TODO добавить запрос с сортировкой по времени
 
+    override fun listenSpendingsByDate(date: String): List<SingleSpendingModel> {
+        return spendingsMapper.mapSpendingsEntityListToModel(database.spendingsDao().getSpendingsByDate(date))
+    }
 }
