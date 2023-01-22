@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dsheal.yummyspends.databinding.*
-import com.dsheal.yummyspends.domain.models.spendings.HistoryDataWrapper
+import com.dsheal.yummyspends.domain.models.history.HistoryDataWrapper
 
 class HistoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

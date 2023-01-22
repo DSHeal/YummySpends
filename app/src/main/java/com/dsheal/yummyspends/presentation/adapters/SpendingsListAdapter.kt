@@ -28,7 +28,7 @@ class SpendingsListAdapter @Inject constructor() :
     }
 
     override fun onBindViewHolder(
-        holder: SpendingsListAdapter.SpendingsListViewHolder,
+        holder: SpendingsListViewHolder,
         position: Int
     ) = holder.bind(differ.currentList[position])
 

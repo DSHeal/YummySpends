@@ -1,4 +1,4 @@
-package com.dsheal.yummyspends.domain.models.spendings
+package com.dsheal.yummyspends.domain.models.history
 
 sealed class HistoryDataWrapper {
 

@@ -30,8 +30,14 @@
     <style name="SubtleButton" parent="Widget.MaterialComponents.Button.TextButton">
         <!--        <item name="android:background">@drawable/bcg_subtle_button</item>-->
         <item name="android:backgroundTint">@color/c_E5E6F2</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 
-        <item name="android:textColor">@color/c_B2B4E8</item>
+    <style name="MediumButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:backgroundTint">@color/c_FF5C5E9F</item>
+        <item name="android:textSize">10sp</item>
+
+        <item name="android:textColor">@color/c_E5E6F2</item>
     </style>
 
     <style name="Toolbar" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">

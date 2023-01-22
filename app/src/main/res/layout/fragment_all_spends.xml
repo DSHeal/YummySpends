@@ -1,136 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/home_toolbar"
-        style="@style/Toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="New spendings" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_please_add_here"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:text="Please, add your first spend here"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/home_toolbar"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="New spendings" />
 
-    <TableLayout
-        android:id="@+id/tl_table_heading_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_toolbar">
+        <TextView
+            android:id="@+id/tv_please_add_here"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="Please, add your first spend here"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
 
-        <TableRow>
+        <TableLayout
+            android:id="@+id/tl_table_heading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_toolbar">
 
-            <TextView
-                style="@style/TableHeader"
-                android:layout_width="0dp"
-                android:layout_column="0"
-                android:layout_gravity="start"
-                android:layout_weight="1"
-                android:text="@string/title_title"
-                android:textAlignment="textStart" />
+            <TableRow>
 
-            <TextView
-                style="@style/TableHeader"
-                android:layout_width="0dp"
-                android:layout_column="1"
-                android:layout_gravity="start"
-                android:layout_weight="0.5"
-                android:paddingEnd="4dp"
-                android:text="@string/price_title"
-                android:textAlignment="textStart" />
+                <TextView
+                    style="@style/TableHeader"
+                    android:layout_width="0dp"
+                    android:layout_column="0"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:text="@string/title_title"
+                    android:textAlignment="textStart" />
 
-            <TextView
-                style="@style/TableHeader"
-                android:layout_width="0dp"
-                android:layout_column="2"
-                android:layout_gravity="start"
-                android:layout_weight="1"
-                android:paddingEnd="4dp"
-                android:text="@string/category_title"
-                android:textAlignment="textStart" />
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    style="@style/TableHeader"
+                    android:layout_width="0dp"
+                    android:layout_column="1"
+                    android:layout_gravity="start"
+                    android:layout_weight="0.5"
+                    android:paddingEnd="4dp"
+                    android:text="@string/price_title"
+                    android:textAlignment="textStart" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_spendings_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/bcg_rounded_8_blue_light"
-        app:layout_constraintTop_toBottomOf="@+id/tl_table_heading_layout"
-        tools:listitem="@layout/single_spending_recycler_item" />
+                <TextView
+                    style="@style/TableHeader"
+                    android:layout_width="0dp"
+                    android:layout_column="2"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:paddingEnd="4dp"
+                    android:text="@string/category_title"
+                    android:textAlignment="textStart" />
+            </TableRow>
+        </TableLayout>
 
-    <TextView
-        android:id="@+id/tv_total_for_spend_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/total_spend"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_spendings_list" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_spendings_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bcg_rounded_8_blue_light"
+            app:layout_constraintTop_toBottomOf="@+id/tl_table_heading_layout"
+            tools:listitem="@layout/single_spending_recycler_item" />
 
-    <Button
-        android:id="@+id/btn_clear_table"
-        style="@style/SubtleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="10sp"
-        android:gravity="center"
-        android:text="Clear table"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_spendings_list" />
+        <TextView
+            android:id="@+id/tv_total_for_spend_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/total_spend"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_spendings_list" />
 
-    <Button
-        android:id="@+id/btn_add_new_spending"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="56dp"
-        android:gravity="center"
-        android:text="Add spending"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_spendings_list" />
+        <Button
+            android:id="@+id/btn_clear_table"
+            style="@style/SubtleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="Clear table"
+            android:textSize="10sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_spendings_list" />
 
-    <Button
-        android:id="@+id/btn_add_spendings_to_history"
-        style="@style/RegularButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="36dp"
-        android:gravity="center"
-        android:text="Add spends to history"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_add_new_spending" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_add_new_spending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="56dp"
+            android:gravity="center"
+            android:text="Add spending"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_spendings_list" />
+
+        <Button
+            android:id="@+id/btn_add_spendings_to_history"
+            style="@style/RegularButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="Add spends to history"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_add_new_spending" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

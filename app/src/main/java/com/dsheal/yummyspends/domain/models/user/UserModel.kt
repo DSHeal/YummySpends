@@ -1,4 +1,4 @@
-package com.dsheal.yummyspends.domain.models.spendings
+package com.dsheal.yummyspends.domain.models.user
 
 data class UserModel(
     val userName: String = "",

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/profileFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_bottom_nav_home"
-        android:title="Home" />
+        android:icon="@drawable/ic_bottom_nav_profile"
+        android:title="Profile" />
+
+<!--    <item-->
+<!--        android:id="@+id/homeFragment"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_bottom_nav_home"-->
+<!--        android:title="Home" />-->
     <item
         android:id="@+id/historyFragment"
         android:enabled="true"
@@ -15,9 +21,5 @@
         android:enabled="true"
         android:icon="@drawable/ic_bottom_nav_analytics"
         android:title="Analytics" />
-    <item
-        android:id="@+id/profileFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_bottom_nav_profile"
-        android:title="Profile" />
+
 </menu>

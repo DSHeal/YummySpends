@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.dsheal.yummyspends.databinding.FragmentHistoryBinding
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
@@ -15,7 +16,6 @@ import com.dsheal.yummyspends.presentation.viewmodels.AllSpendingsFieldViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class SpendingsHistoryFragment : BaseFragment() {
@@ -31,6 +31,18 @@ class SpendingsHistoryFragment : BaseFragment() {
 
     private val viewModel: AllSpendingsFieldViewModel by viewModels()
 
+    private val spendingsHistoryFragmentArgs: SpendingsHistoryFragmentArgs by navArgs()
+
+    companion object {
+        const val DATE = "DATE"
+        fun newInstance(date: String) =
+            SpendingsHistoryFragment().apply {
+                arguments = Bundle().apply {
+                    putString(DATE, date)
+                }
+            }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +54,9 @@ class SpendingsHistoryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val userDate: String = if (!spendingsHistoryFragmentArgs.date.isNullOrEmpty()) spendingsHistoryFragmentArgs.date!!
+        else ""
         viewModel.listenAllSpendingsFromDb()
 
         viewModel.spending.observe(viewLifecycleOwner) { state ->
@@ -51,19 +66,28 @@ class SpendingsHistoryFragment : BaseFragment() {
                     showAlert(state.error.message)
                 }
                 is BaseViewModel.State.Success -> {
-                    onDataFetched(state.data)
+                    onDataFetched(state.data, userDate)
                 }
             }
         }
     }
 
-    fun onDataFetched(data: List<SingleSpendingModel>) {
+    fun onDataFetched(data: List<SingleSpendingModel>, userDate: String) {
         val calendar = Calendar.getInstance()
         val today = calendar.get(Calendar.DAY_OF_YEAR)
 
+
         viewPager = binding.vpSpendHistory
         binding.vpSpendHistory.adapter = HistoryViewPagerAdapter(this, data)
-        viewPager.setCurrentItem(today, false)
+
+        if (userDate.isNotEmpty()) {
+            val localDate = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT).parse(userDate)
+            if (localDate != null) {
+                calendar.time = localDate
+            }
+            val userDay = calendar.get(Calendar.DAY_OF_YEAR)
+            viewPager.setCurrentItem(userDay, false)
+        } else viewPager.setCurrentItem(today, false)
 
         with(binding) {
             ivCalendarArrowRight.setOnClickListener {

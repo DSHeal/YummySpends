@@ -26,24 +26,24 @@ class AllSpendingsFieldFragment : BaseFragment() {
     private val binding get() = mBinding!!
 
     private val allSpendingsFieldViewModel: AllSpendingsFieldViewModel by viewModels()
-    private val args: AllSpendingsFieldFragmentArgs by navArgs()
+    private val args: AllSpendingsFieldFragmentArgs? by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
-        allSpendingsFieldViewModel.listenAllSpendingsFromDb()
-        allSpendingsFieldViewModel.spending.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is BaseViewModel.State.Loading -> {}
-                is BaseViewModel.State.Failure -> {
-                    showAlert(state.error.message)
-                }
-                is BaseViewModel.State.Success -> {
-                    onDataFetched(state.data)
-                }
-            }
-        }
+//        allSpendingsFieldViewModel.listenAllSpendingsFromDb()
+//        allSpendingsFieldViewModel.spending.observe(viewLifecycleOwner) { state ->
+//            when (state) {
+//                is BaseViewModel.State.Loading -> {}
+//                is BaseViewModel.State.Failure -> {
+//                    showAlert(state.error.message)
+//                }
+//                is BaseViewModel.State.Success -> {
+//                    onDataFetched(state.data)
+//                }
+//            }
+//        }
     }
 
     override fun onCreateView(
@@ -56,14 +56,35 @@ class AllSpendingsFieldFragment : BaseFragment() {
     }
 
     private fun initViews() {
-        binding.btnAddNewSpending.setOnClickListener {
-//            allSpendingsFieldViewModel.onAddNewSpendingClick()
-            findNavController().navigate(AllSpendingsFieldFragmentDirections.toAddNewSpending())
-
+        binding.rvSpendingsList.apply {
+            adapter = SpendingsListAdapter()
+            layoutManager = LinearLayoutManager(requireContext())
         }
+        if (args?.spending != null) {
+            binding.tlTableHeadingLayout.visibility = View.VISIBLE
+            binding.tvPleaseAddHere.visibility = View.GONE
+            binding.tvTotalForSpendList.visibility = View.VISIBLE
+            binding.btnClearTable.visibility = View.VISIBLE
+
+            (binding.rvSpendingsList.adapter as SpendingsListAdapter).updateList(listOf(args!!.spending!!))
+            val allPricesList = mutableListOf<Int>()
+           allPricesList.add(args!!.spending!!.spendingPrice)
+            binding.tvTotalForSpendList.text = getString(R.string.total_spend, allPricesList.sum())
+        } else {
+            binding.tlTableHeadingLayout.visibility = View.GONE
+            binding.tvPleaseAddHere.visibility = View.VISIBLE
+            binding.tvTotalForSpendList.visibility = View.GONE
+            binding.btnClearTable.visibility = View.GONE
+        }
+//        binding.btnAddNewSpending.setOnClickListener {
+////            allSpendingsFieldViewModel.onAddNewSpendingClick()
+//            findNavController().navigate(AllSpendingsFieldFragmentDirections.toAddNewSpending())
+//
+//        }
 
         binding.btnAddSpendingsToHistory.setOnClickListener {
 //            allSpendingsFieldViewModel.onAddNewSpendingClick()
+            (binding.rvSpendingsList.adapter as SpendingsListAdapter).updateList(emptyList())
             findNavController().navigate(AllSpendingsFieldFragmentDirections.actionHomeFragmentToHistoryFragment())
 
         }
@@ -71,10 +92,7 @@ class AllSpendingsFieldFragment : BaseFragment() {
         binding.btnClearTable.setOnClickListener {
             allSpendingsFieldViewModel.deleteAllSpendingsFromDb()
         }
-        binding.rvSpendingsList.apply {
-            adapter = SpendingsListAdapter()
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+
     }
 
     fun onDataFetched(data: List<SingleSpendingModel>) {
@@ -96,8 +114,8 @@ class AllSpendingsFieldFragment : BaseFragment() {
         }
         binding.tvTotalForSpendList.text = getString(R.string.total_spend, allPricesList.sum())
 
-        val spendsArrayList = data as ArrayList
 
+        val spendsArrayList = data as ArrayList
 //        (binding.rvSpendingsList.adapter as SpendingsListAdapter).notifyDataSetChanged()
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(

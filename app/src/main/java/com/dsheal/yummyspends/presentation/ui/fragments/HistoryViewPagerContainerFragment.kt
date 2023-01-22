@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dsheal.yummyspends.R
 import com.dsheal.yummyspends.databinding.FragmentHistoryViewPagerContainerBinding
-import com.dsheal.yummyspends.domain.models.spendings.HistoryDataWrapper
+import com.dsheal.yummyspends.domain.models.history.HistoryDataWrapper
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.presentation.adapters.HistoryListAdapter
 import com.dsheal.yummyspends.presentation.base.BaseViewModel
@@ -55,6 +56,13 @@ class HistoryViewPagerContainerFragment : BaseFragment() {
             dateForHeader = arguments?.getString(DATE) ?: ""
             tbHistoryCurrentDate.title = dateForHeader
             tbHistoryCurrentDate.setTitleMargin(250, 20, 20, 20)
+
+            btnAddNewSpending.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("DATE", dateForHeader)
+                findNavController().navigate(R.id.addNewSpending, bundle)
+
+            }
 
             val recycler = rvHistoryList
             recycler.apply {
