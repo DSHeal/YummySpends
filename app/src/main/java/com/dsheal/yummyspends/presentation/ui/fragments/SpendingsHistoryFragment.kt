@@ -63,7 +63,7 @@ class SpendingsHistoryFragment : BaseFragment() {
             when (state) {
                 is BaseViewModel.State.Loading -> {}
                 is BaseViewModel.State.Failure -> {
-                    showAlert(state.error.message)
+                    showAlert(state.error?.message)
                 }
                 is BaseViewModel.State.Success -> {
                     onDataFetched(state.data, userDate)

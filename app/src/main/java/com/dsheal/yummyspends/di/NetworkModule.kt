@@ -1,6 +1,9 @@
 package com.dsheal.yummyspends.di
 
 import com.dsheal.yummyspends.data.network.Api
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -36,15 +39,19 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://imdb-api.com/en/")
+            .baseUrl("https://sheets.googleapis.com")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .build()
     }
 
     @Provides
+    fun provideFirebaseDatabase(): FirebaseDatabase {
+        return Firebase.database("https://yummyspends-default-rtdb.europe-west1.firebasedatabase.app/")
+    }
+
+    @Provides
     fun provideApiClient(retrofit: Retrofit): Api {
         return retrofit.create(Api::class.java)
     }
-
 }

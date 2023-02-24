@@ -8,7 +8,7 @@ class SpendingsMapper @Inject constructor() {
 
     fun mapSingleSpendingModelToEntity(spendingsModel: SingleSpendingModel): SpendingsEntity =
         SpendingsEntity(
-            spendingId = 0,
+            spendingId = spendingsModel.id,
             spendingName = spendingsModel.spendingName,
             spendingPrice = spendingsModel.spendingPrice,
             spendingCategory = spendingsModel.spendingCategory,

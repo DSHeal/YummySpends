@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Yummy Spends</string>
+    <string name="category_title">Категория</string>
+    <string name="my_categories_title">Мои категории</string>
+</resources>

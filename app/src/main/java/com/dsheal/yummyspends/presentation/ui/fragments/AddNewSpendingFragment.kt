@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.dsheal.yummyspends.R
 import com.dsheal.yummyspends.databinding.FragmentAddNewSpendingBinding
 import com.dsheal.yummyspends.domain.models.spendings.Category
+import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.presentation.adapters.CategorySpinnerAdapter
 import com.dsheal.yummyspends.presentation.base.BaseViewModel
 import com.dsheal.yummyspends.presentation.ui.activities.MainActivity
@@ -57,7 +58,7 @@ class AddNewSpendingFragment : BaseFragment() {
             when (state) {
                 is BaseViewModel.State.Loading -> {}
                 is BaseViewModel.State.Failure -> {
-                    showAlert(state.error.message)
+                    showAlert(state.error?.message)
                 }
                 is BaseViewModel.State.Success -> {
                     showAlert("Saved")
@@ -106,8 +107,13 @@ class AddNewSpendingFragment : BaseFragment() {
                 requireContext(),
                 R.layout.item_spinner,
                 if (categories[0] != Category("Add your category", false))
-                    categoriesSorted + listOf(Category("Add your category", false))
-                else categoriesSorted
+                    categoriesSorted.toMutableList() + mutableListOf(
+                        Category(
+                            "Add your category",
+                            false
+                        )
+                    )
+                else categoriesSorted.toMutableList()
             )
 
         val spinner = binding.spCategories
@@ -202,11 +208,13 @@ class AddNewSpendingFragment : BaseFragment() {
             )
                 .show()
 
-            addNewSpendingViewModel.saveSpendingInDb(
-                spendTitle,
-                spendCost.toInt(),
-                spendCategory,
-                if (customerDate == "today") currentDate.toString() else customerDate
+            addNewSpendingViewModel.sendDataToRemoteDb(
+                SingleSpendingModel(
+                    spendingName = spendTitle,
+                    spendingPrice = spendCost.toInt(),
+                    spendingCategory = spendCategory,
+                    purchaseDate = if (customerDate == "today") currentDate.toString() else customerDate
+                )
             )
             binding.etSingleSpendingName.setText("")
             binding.etSingleSpendingPrice.setText("")
