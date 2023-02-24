@@ -4,9 +4,9 @@ import androidx.room.*
 
 @Entity(
     tableName = SpendingsEntity.TABLE_NAME,
-//    primaryKeys = [
-//        SpendingsEntity.COLUMN_SPENDING_ID]
-//    ],
+    primaryKeys = [
+        SpendingsEntity.COLUMN_SPENDING_ID]
+
 //    foreignKeys = [
 //        ForeignKey(
 //            entity = UserEntity::class,
@@ -17,11 +17,11 @@ import androidx.room.*
 )
 
 class SpendingsEntity(
-    @PrimaryKey(autoGenerate = true)
+//    @PrimaryKey(autoGenerate = true)
 //    @ColumnInfo(name = COLUMN_USER_NAME)
 //    val userName: String,
     @ColumnInfo(name = COLUMN_SPENDING_ID)
-    val spendingId: Int,
+    val spendingId: String,
     @ColumnInfo(name = COLUMN_ITEM_NAME)
     val spendingName: String,
     @ColumnInfo(name = COLUMN_ITEM_PRICE)
