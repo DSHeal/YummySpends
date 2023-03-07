@@ -1,26 +1,34 @@
 package com.dsheal.yummyspends.data.repositories
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import com.dsheal.yummyspends.data.database.AppDatabase
 import com.dsheal.yummyspends.data.mappers.SpendingsMapper
+import com.dsheal.yummyspends.domain.models.spendings.Category
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.domain.repositories.SpendingsRepository
 import com.dsheal.yummyspends.presentation.base.BaseViewModel.*
+import com.dsheal.yummyspends.presentation.ui.activities.MainActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
+import java.lang.reflect.Type
 import javax.inject.Inject
 
 class SpendinsRepositoryImpl @Inject constructor(
     private val database: AppDatabase,
     private val spendingsMapper: SpendingsMapper,
-    private val firebaseDatabase: FirebaseDatabase
+    private val firebaseDatabase: FirebaseDatabase,
+    private val sharedPreferences: SharedPreferences
 ) : SpendingsRepository {
 
     companion object {
@@ -28,6 +36,26 @@ class SpendinsRepositoryImpl @Inject constructor(
     }
 
     val myRef = firebaseDatabase.getReference("items")
+
+    override suspend fun getCategoriesListFromFirebase(): Flow<State<ArrayList<String>>> =
+        callbackFlow {
+            firebaseDatabase.getReference("categories").get()
+                .addOnCompleteListener { task ->
+                    val response = if (task.isSuccessful) {
+                        val data = task.result.getValue<ArrayList<String>>()!!
+                        Log.i("CATEGORIES_FROM_FB", data.toString())
+                        State.Success<ArrayList<String>>(data)
+                    } else {
+                        State.Failure(errorMessage = task.exception?.localizedMessage)
+                    }
+                    trySend(response).isSuccess
+                }
+
+            awaitClose {
+                close()
+            }
+        }
+
 
     override suspend fun getAllDataFromFirebaseDb(): Flow<State<Map<String, Any>>> = callbackFlow {
         myRef.get()
@@ -58,6 +86,13 @@ class SpendinsRepositoryImpl @Inject constructor(
     }
 
     fun saveDataFromRemoteSourceInLocalDb(map: Map<String, HashMap<String, Any>>) {
+        val categoriesAlreadyAdded = Gson().fromJson<List<String>>(
+            sharedPreferences.getString("categories", ""),
+            object : TypeToken<ArrayList<String?>?>() {}.type
+        ).orEmpty()
+
+        val editor = sharedPreferences.edit()
+
         map.forEach {
             val idFromFb = it.key
             Log.i("ID_FROM_FB", idFromFb)
@@ -74,11 +109,17 @@ class SpendinsRepositoryImpl @Inject constructor(
                 Log.i("NAME", name)
                 if (innerMap.key == "spendingPrice") price = innerMap.value as Long
                 Log.i("PRICE", price.toString())
-                if (innerMap.key == "spendingCategory") category = innerMap.value as String
+                if (innerMap.key == "spendingCategory") {
+                    category = innerMap.value as String
+                    val listToSave = categoriesAlreadyAdded.plus(listOf(category))
+                    val json = Gson().toJson(listToSave)
+                    editor.putString("categories", json)
+                    editor.apply()
+                }
                 Log.i("CATEGORY", category)
             }
             val spending = SingleSpendingModel(
-                id = idFromFb, spendingName = name.toString(),
+                id = idFromFb, spendingName = name,
                 spendingPrice = price.toInt(), spendingCategory = category, purchaseDate = date
             )
             Log.i("SPENDING", spending.toString())
@@ -129,7 +170,30 @@ class SpendinsRepositoryImpl @Inject constructor(
             Log.w(TAG, "Couldn't get push key for posts")
         }
         myRef.child(key!!).setValue(spending)
+        sendCategoriesFromSharedPrefsToRemoteDb()
         return key
+    }
+
+    override fun sendCategoriesToRemoteDb(categories: ArrayList<String>) {
+        firebaseDatabase.reference.child("categories").setValue(categories)
+    }
+
+    fun sendCategoriesFromSharedPrefsToRemoteDb() {
+
+        val gson = Gson()
+
+        val json = sharedPreferences.getString("categories", "")
+
+        val type: Type = object : TypeToken<ArrayList<String?>?>() {}.type
+        val categories =
+            gson.fromJson<Any>(json, type)
+
+        //тут тоже надо тот же трюк с ключом, как и с отдельными тратами
+
+        //TODO сделать проверку на идентичность двух списков, и если списки различны - только
+        // тогда отправлять данные в remote Db, а не каждый раз
+
+        firebaseDatabase.reference.child("categories").setValue(categories)
     }
 
     override fun saveSpendingsInDatabase(spending: SingleSpendingModel) {

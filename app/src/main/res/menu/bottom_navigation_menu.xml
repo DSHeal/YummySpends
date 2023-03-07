@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_nav_profile"
-        android:title="Profile" />
+        android:title="Profile"
+        app:showAsAction="ifRoom" />
 
-<!--    <item-->
-<!--        android:id="@+id/homeFragment"-->
-<!--        android:enabled="true"-->
-<!--        android:icon="@drawable/ic_bottom_nav_home"-->
-<!--        android:title="Home" />-->
+    <!--    <item-->
+    <!--        android:id="@+id/homeFragment"-->
+    <!--        android:enabled="true"-->
+    <!--        android:icon="@drawable/ic_bottom_nav_home"-->
+    <!--        android:title="Home" />-->
     <item
         android:id="@+id/historyFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_nav_history"
-        android:title="History" />
+        android:title="History"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/analyitcsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_nav_analytics"
-        android:title="Analytics" />
+        android:title="Analytics"
+        app:showAsAction="ifRoom" />
 
 </menu>

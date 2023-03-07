@@ -8,13 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import com.dsheal.yummyspends.R
-import com.dsheal.yummyspends.domain.models.spendings.Category
 
 class CategorySpinnerAdapter(
     context: Context,
     private val layoutId: Int,
-    private val spinnerItems: List<Category>,
-) : ArrayAdapter<Category>(
+    private val spinnerItems: List<String>,
+) : ArrayAdapter<String>(
     context,
     layoutId,
     spinnerItems
@@ -27,17 +26,17 @@ class CategorySpinnerAdapter(
         val parentSpinner = parent as? Spinner
 
         return if (parentSpinner != null) bindSelectedData(
-            getItem(parent.selectedItemPosition).name,
+            getItem(parent.selectedItemPosition),
             view as TextView
         )
-        else bindSelectedData(getItem(position).name, view as TextView)
+        else bindSelectedData(getItem(position), view as TextView)
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view =
             convertView ?: LayoutInflater.from(context)
                 .inflate(R.layout.item_category_spinner_dropdown, parent, false)
-        return bindData(getItem(position).name, view as TextView)
+        return bindData(getItem(position), view as TextView)
     }
 
     private fun bindData(value: String, view: TextView): TextView {

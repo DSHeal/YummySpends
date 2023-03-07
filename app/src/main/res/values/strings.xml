@@ -6,4 +6,8 @@
     <string name="title_title">Title</string>
     <string name="history_total_for_the_day">Total for the day: %1$d</string>
     <string name="my_categories_title">My categories</string>
+    <string name="delete_confirmation_title">Are you sure? Delete?</string>
+    <string name="delete_agree">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_category_title">Добавить категорию</string>
 </resources>

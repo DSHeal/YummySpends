@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.dsheal.yummyspends.R
 import com.dsheal.yummyspends.databinding.FragmentAddNewSpendingBinding
-import com.dsheal.yummyspends.domain.models.spendings.Category
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.presentation.adapters.CategorySpinnerAdapter
 import com.dsheal.yummyspends.presentation.base.BaseViewModel
@@ -34,11 +33,7 @@ class AddNewSpendingFragment : BaseFragment() {
 
     private val addNewSpendingViewModel: AllSpendingsFieldViewModel by viewModels()
 
-    var categories: ArrayList<Category> =
-        arrayListOf(
-            Category("Овощи и фрукты", false), Category("Бакалея", false),
-            Category("Молочная продукция", false)
-        )
+    var categories: ArrayList<String> = arrayListOf()
 
     companion object {
         const val DATE = "DATE"
@@ -86,32 +81,29 @@ class AddNewSpendingFragment : BaseFragment() {
 
         val json = sharedPreferences.getString("categories", null)
 
-        val type: Type = object : TypeToken<ArrayList<Category?>?>() {}.type
+        val type: Type = object : TypeToken<ArrayList<String?>?>() {}.type
 
         if (gson.fromJson<Any>(json, type) == null) {
             categories = ArrayList()
-            categories.add(0, (Category("Add your category", false)))
+            categories.add(0, ("Add your category"))
         } else {
             categories =
-                gson.fromJson<Any>(json, type) as ArrayList<Category>
-            if (categories[0].name == "Add your category") {
+                gson.fromJson<Any>(json, type) as ArrayList<String>
+            if (categories[0] == "Add your category") {
                 categories.removeAt(0)
             }
         }
 
         val categoriesSorted = categories.distinct()
-            .sortedBy { it.name }
+            .sortedBy { it }
 
         val arrayAdapter =
             CategorySpinnerAdapter(
                 requireContext(),
                 R.layout.item_spinner,
-                if (categories[0] != Category("Add your category", false))
+                if (categories[0] != "Add your category")
                     categoriesSorted.toMutableList() + mutableListOf(
-                        Category(
-                            "Add your category",
-                            false
-                        )
+                        "Add your category"
                     )
                 else categoriesSorted.toMutableList()
             )
@@ -124,10 +116,7 @@ class AddNewSpendingFragment : BaseFragment() {
                 position: Int,
                 id: Long
             ) {
-                if (position == categoriesSorted.lastIndex && categoriesSorted[0] == Category(
-                        "Add your category",
-                        false
-                    )
+                if (position == categoriesSorted.lastIndex && categoriesSorted[0] == "Add your category"
                 ) {
                     binding.tvSingleSpendingCategory.setText("")
                     binding.tvSingleSpendingCategory.visibility =
@@ -140,7 +129,7 @@ class AddNewSpendingFragment : BaseFragment() {
                         View.VISIBLE
 
                     spinner.visibility = View.GONE
-                } else binding.tvSingleSpendingCategory.setText(categoriesSorted[position].name)
+                } else binding.tvSingleSpendingCategory.setText(categoriesSorted[position])
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -173,18 +162,18 @@ class AddNewSpendingFragment : BaseFragment() {
             val spendCost = binding.etSingleSpendingPrice.text.toString()
             val spendCategory = binding.tvSingleSpendingCategory.text.toString()
             val customerDate = binding.tvSpendingDate.text.toString()
-            if (categories.find { category -> category.name == spendCategory } == null) {
-                categories.add(Category(spendCategory, true))
-                arrayAdapter.add(Category(spendCategory, true))
-                arrayAdapter.remove(Category("Add your category", false))
+            if (categories.find { category -> category == spendCategory } == null) {
+                categories.add(spendCategory)
+                arrayAdapter.add(spendCategory)
+                arrayAdapter.remove("Add your category")
                 arrayAdapter.sort { el1, el2 ->
-                    el1.name.compareTo(el2.name)
+                    el1.compareTo(el2)
                 }
-                arrayAdapter.add(Category("Add your category", false))
+                arrayAdapter.add("Add your category")
 
                 arrayAdapter.notifyDataSetChanged()
                 val newCategory = categories.find { category ->
-                    category.name == spendCategory
+                    category == spendCategory
                 }
                 spinner.setSelection(arrayAdapter.getPosition(newCategory), false)
 
@@ -194,9 +183,9 @@ class AddNewSpendingFragment : BaseFragment() {
             val editor = sharedPrefs.edit()
             val mGson = Gson()
 
-            categories.remove(Category("Add your category", false))
+            categories.remove("Add your category")
             val categoryNames = categories.distinct()
-                .sortedBy { it.name }
+                .sortedBy { it }
 
             val mJson: String = mGson.toJson(categoryNames)
             editor.putString("categories", mJson)
@@ -211,7 +200,7 @@ class AddNewSpendingFragment : BaseFragment() {
             addNewSpendingViewModel.sendDataToRemoteDb(
                 SingleSpendingModel(
                     spendingName = spendTitle,
-                    spendingPrice = spendCost.toInt(),
+                    spendingPrice = if (spendCost.isNotEmpty()) spendCost.toInt() else 0,
                     spendingCategory = spendCategory,
                     purchaseDate = if (customerDate == "today") currentDate.toString() else customerDate
                 )
@@ -228,6 +217,13 @@ class AddNewSpendingFragment : BaseFragment() {
             findNavController().navigate(
                 AddNewSpendingFragmentDirections.toHistoryFragment(
                     customerDate
+                )
+            )
+        }
+
+        binding.ivEditCategories.setOnClickListener {
+            findNavController().navigate(
+                AddNewSpendingFragmentDirections.toUserCategoriesFragment(
                 )
             )
         }

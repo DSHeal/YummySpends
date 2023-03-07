@@ -41,7 +41,9 @@
         <action
             android:id="@+id/action_addNewSpending_to_historyViewPagerContainerFragment"
             app:destination="@id/historyViewPagerContainerFragment" />
-
+        <action
+            android:id="@+id/toUserCategoriesFragment"
+            app:destination="@id/userCategoriesFragment" />
     </fragment>
 
     <fragment
@@ -76,5 +78,10 @@
             app:destination="@id/addNewSpending" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/userCategoriesFragment"
+        android:name="com.dsheal.yummyspends.presentation.ui.fragments.UserCategoriesFragment"
+        android:label="UserCategoriesFragment" />
 
 </navigation>

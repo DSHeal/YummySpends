@@ -1,6 +1,7 @@
 package com.dsheal.yummyspends.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.dsheal.yummyspends.common.Constants
 import com.dsheal.yummyspends.data.database.AppDatabase
@@ -40,4 +41,13 @@ class DataModule {
     @Provides
     @Singleton
     fun provideRemoteConfig(): RemoteConfigInteractor = RemoteConfigInteractorImpl()
+
+    @Provides
+    fun provideContext(): ApplicationContext = ApplicationContext()
+
+    @Singleton
+    @Provides
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("shared preferences", Context.MODE_PRIVATE)
+    }
 }
