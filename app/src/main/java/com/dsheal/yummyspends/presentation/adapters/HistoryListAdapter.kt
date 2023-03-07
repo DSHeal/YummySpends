@@ -1,7 +1,9 @@
 package com.dsheal.yummyspends.presentation.adapters
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +24,21 @@ class HistoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class CategoryItemViewHolder(private val binding: ItemHistoryCategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: HistoryDataWrapper.CategoryTableItem) {
+            binding.clHistoryItem.setOnLongClickListener {
+                AlertDialog.Builder(binding.root.context)
+                    .setPositiveButton("Редактировать") { _, _ ->
+
+                    }
+                    .setNegativeButton("Удалить") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create()
+                    .show()
+                Toast.makeText(binding.root.context, "AAA", Toast.LENGTH_LONG).show()
+                true
+            }
             binding.tvHistoryCategoryItemName.text = item.itemName
             binding.tvHistoryCategoryItemPrice.text = item.itemPrice.toString()
         }

@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface SpendingsRepository {
 
+    suspend fun getCategoriesListFromFirebase(): Flow<State<ArrayList<String>>>
+
     suspend fun getAllDataFromFirebaseDb(): Flow<State<Map<String, Any>>>
 
     fun listenDataFromFirebaseDbInRealTime(): Flow<State<List<SingleSpendingModel>>>
@@ -15,6 +17,8 @@ interface SpendingsRepository {
     fun getSpendingByIdFromRemoteDb(id: String): Flow<State<Map<String, Any>>>
 
     fun sendDataToFirebaseDb(spending: SingleSpendingModel): String?
+
+    fun sendCategoriesToRemoteDb(categories: ArrayList<String>)
 
     fun listenSpendingsListFromDatabase(): List<SingleSpendingModel>
 

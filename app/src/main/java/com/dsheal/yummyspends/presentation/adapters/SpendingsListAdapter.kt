@@ -12,8 +12,6 @@ import javax.inject.Inject
 class SpendingsListAdapter @Inject constructor() :
     RecyclerView.Adapter<SpendingsListAdapter.SpendingsListViewHolder>() {
 
-//    private var spendings: List<SingleSpendingModel> = emptyList()
-
     private val differ = AsyncListDiffer(this, SpendingItemCallback())
 
     override fun onCreateViewHolder(

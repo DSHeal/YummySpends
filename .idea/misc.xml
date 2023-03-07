@@ -18,15 +18,18 @@
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1265" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/drawable/ic_toolbar_arrow_back_black.xml" value="0.155" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/drawable/profile_icon.xml" value="0.155" />
-        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_add_new_spending.xml" value="0.22" />
+        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/custom_edit_text_dialog.xml" value="0.16302083333333334" />
+        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_add_new_spending.xml" value="0.363244176013805" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_all_my_spendings.xml" value="0.1796875" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_all_spends.xml" value="0.321875" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_history.xml" value="0.1796875" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_history_view_pager_container.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_home.xml" value="0.1796875" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_profile.xml" value="0.134765625" />
+        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/fragment_user_categories.xml" value="0.22" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/history_recycler_item.xml" value="0.17864583333333334" />
+        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/item_categories_recycler.xml" value="0.1796875" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/item_category_spinner_dropdown.xml" value="0.1796875" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/item_edit_text_dialog.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/item_history.xml" value="0.11770833333333333" />
@@ -40,6 +43,7 @@
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/item_spinner_dropdown.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/layout/single_spending_recycler_item.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1796875" />
+        <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/menu/edit_category_menu.xml" value="0.17864583333333334" />
         <entry key="..\:/Users/daria/AndroidStudioProjects/YummySpendings/app/src/main/res/xml/remote_config.xml" value="0.1" />
         <entry key="..\:/Users/daria/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_dropdown_item_1line.xml" value="0.1796875" />
         <entry key="..\:/Users/daria/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.1640625" />
