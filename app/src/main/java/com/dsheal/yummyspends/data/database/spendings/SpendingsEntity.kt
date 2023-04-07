@@ -6,7 +6,7 @@ import androidx.room.*
     tableName = SpendingsEntity.TABLE_NAME,
     primaryKeys = [
         SpendingsEntity.COLUMN_SPENDING_ID]
-
+//TODO link then to userEntity
 //    foreignKeys = [
 //        ForeignKey(
 //            entity = UserEntity::class,
@@ -17,6 +17,7 @@ import androidx.room.*
 )
 
 class SpendingsEntity(
+//TODO link then to userEntity
 //    @PrimaryKey(autoGenerate = true)
 //    @ColumnInfo(name = COLUMN_USER_NAME)
 //    val userName: String,

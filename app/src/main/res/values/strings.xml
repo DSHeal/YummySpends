@@ -1,13 +1,38 @@
 <resources>
+
+    <!--COMMON-->
     <string name="app_name" translatable="false">Yummy Spends</string>
     <string name="total_spend">Total: %1$d</string>
-    <string name="category_title">Category</string>
-    <string name="price_title" translatable="false">Price</string>
-    <string name="title_title">Title</string>
-    <string name="history_total_for_the_day">Total for the day: %1$d</string>
-    <string name="my_categories_title">My categories</string>
+    <string name="price_title">Price</string>
+    <string name="title">Title</string>
+    <string name="cost">Cost</string>
+    <string name="date">Date</string>
     <string name="delete_confirmation_title">Are you sure? Delete?</string>
-    <string name="delete_agree">Delete</string>
+    <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
-    <string name="add_category_title">Добавить категорию</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
+    <string name="back">Back</string>
+
+    <!--CATEGORY-->
+    <string name="category_title">Category</string>
+    <string name="add_category_title">Add category</string>
+    <string name="my_categories_title">My categories</string>
+    <string name="enter_your_category">Enter your category</string>
+
+    <!--HISTORY-->
+    <string name="history_total_for_the_day">Total for the day: %1$d</string>
+
+    <!--ADD NEW SPENDING-->
+    <string name="add_new_spending_title">Add new spending</string>
+    <string name="when_did_you_buy">When did you buy?</string>
+    <string name="what_did_you_buy">What did you buy?</string>
+    <string name="how_much_did_it_cost">How much did it cost?</string>
+    <string name="please_add_your_first_spend_here">Please, add your first spend here</string>
+    <string name="add_spending">Add spending</string>
+
+    <string name="history">History</string>
+    <string name="analytics">Analytics</string>
+
 </resources>

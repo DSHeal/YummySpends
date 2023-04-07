@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Yummy Spends</string>
     <string name="category_title">Категория</string>
     <string name="my_categories_title">Мои категории</string>
+    <string name="price_title">Цена</string>
+    <string name="title_title">Название</string>
+    <string name="history_total_for_the_day">Траты за день: %1$d</string>
+    <string name="delete_confirmation_title">Вы уверены? Удалить?</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
+    <string name="add_category_title">Добавить категорию</string>
+    <string name="save">Сохранить</string>
+    <string name="edit">Редактировать</string>
+    <string name="total_spend">В сумме: %1$d</string>
+    <string name="title">Название</string>
+    <string name="cost">Затраты</string>
+    <string name="date">Дата</string>
+    <string name="add">Добавить</string>
+    <string name="back">Назад</string>
+    <string name="enter_your_category">Введите свою категорию</string>
+    <string name="add_new_spending_title">Добавить новые траты</string>
+    <string name="when_did_you_buy">Когда?</string>
+    <string name="what_did_you_buy">Что?</string>
+    <string name="how_much_did_it_cost">Сколько стоило?</string>
+    <string name="please_add_your_first_spend_here">Добавьте свою первую категорию здесь</string>
+    <string name="add_spending">Добавить расходы</string>
+    <string name="history">История</string>
+    <string name="analytics">Аналитика</string>
 </resources>

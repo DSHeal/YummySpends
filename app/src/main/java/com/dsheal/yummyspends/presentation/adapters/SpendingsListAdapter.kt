@@ -30,7 +30,6 @@ class SpendingsListAdapter @Inject constructor() :
         position: Int
     ) = holder.bind(differ.currentList[position])
 
-
     override fun getItemCount(): Int = differ.currentList.size
 
     class SpendingsListViewHolder(private val binding: SingleSpendingRecyclerItemBinding) :
@@ -42,7 +41,6 @@ class SpendingsListAdapter @Inject constructor() :
                 tvSingleSpendingPrice.text = item.spendingPrice.toString()
                 tvSingleSpendingCategory.text = item.spendingCategory
             }
-
         }
     }
 

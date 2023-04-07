@@ -144,7 +144,7 @@ class AddNewSpendingFragment : BaseFragment() {
             gravity = Gravity.CENTER
         }
 
-        binding.tbAddOneSpend.title = "Add new spending"
+        binding.tbAddOneSpend.title = getString(R.string.add_new_spending_title)
         binding.tbAddOneSpend.setNavigationOnClickListener {
             (activity as MainActivity).onBackPressed()
         }

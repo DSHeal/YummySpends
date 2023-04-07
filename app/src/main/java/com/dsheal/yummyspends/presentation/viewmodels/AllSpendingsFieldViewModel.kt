@@ -1,8 +1,10 @@
 package com.dsheal.yummyspends.presentation.viewmodels
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.dsheal.yummyspends.data.repositories.SpendinsRepositoryImpl
 import com.dsheal.yummyspends.data.repositories.SpendinsRepositoryImpl.Companion.TAG
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.domain.repositories.SpendingsRepository
@@ -15,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AllSpendingsFieldViewModel @Inject constructor(
-    private val spendingsRepository: SpendingsRepository
+    private val spendingsRepository: SpendingsRepository,
+    private val sharedPreferences: SharedPreferences
 ) : BaseViewModel() {
 
     private var spendingLiveData = MutableLiveData<State<List<SingleSpendingModel>>>()
@@ -38,6 +41,30 @@ class AllSpendingsFieldViewModel @Inject constructor(
                     spending
                 )
             )
+        }
+    }
+
+    fun getCategoriesFromRemoteDbAndWriteToSharedPrefs() {
+        viewModelScope.launch(Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
+            Log.d("AllSpendVM", throwable.message ?: "")
+//            categoriesLiveData.postValue(State.Failure(throwable))
+        }) {
+            val categoriesFlow = spendingsRepository.getCategoriesListFromFirebase()
+            categoriesFlow.collect { state ->
+                when (state) {
+                    is State.Success -> {
+                        Log.i("Categories from Db", state.toString())
+//                        categoriesLiveData.postValue(State.Success(state.data))
+sharedPreferences.edit()
+                    }
+                    is State.Failure -> {
+                        Log.i(SpendinsRepositoryImpl.TAG, state.error!!.toString())
+                    }
+                    is State.Loading -> {
+
+                    }
+                }
+            }
         }
     }
 

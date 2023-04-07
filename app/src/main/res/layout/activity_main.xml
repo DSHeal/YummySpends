@@ -25,5 +25,4 @@
         app:elevation="40dp"
         app:menu="@menu/bottom_navigation_menu" />
 
-
 </LinearLayout>

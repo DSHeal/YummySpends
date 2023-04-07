@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tl_spendings_single_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
                 android:layout_column="0"
                 android:layout_margin="1dp"
                 android:layout_weight="1"
-                android:hint="Название"
+                tools:hint="Название"
                 android:padding="3dip"
                 android:textAlignment="textStart" />
 
@@ -34,7 +35,7 @@
                 android:layout_column="1"
                 android:layout_margin="1dp"
                 android:layout_weight="0.5"
-                android:hint="стоимость"
+                tools:hint="стоимость"
                 android:padding="3dip"
                 android:textAlignment="textStart" />
 
@@ -45,7 +46,7 @@
                 android:layout_column="2"
                 android:layout_margin="1dp"
                 android:layout_weight="1"
-                android:hint="категория"
+                tools:hint="категория"
                 android:padding="3dip"
                 android:textAlignment="textStart" />
         </TableRow>

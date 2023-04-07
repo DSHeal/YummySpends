@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.dsheal.yummyspends.R
 import com.dsheal.yummyspends.databinding.*
 import com.dsheal.yummyspends.domain.models.history.HistoryDataWrapper
 
@@ -28,10 +29,10 @@ class HistoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(item: HistoryDataWrapper.CategoryTableItem) {
             binding.clHistoryItem.setOnLongClickListener {
                 AlertDialog.Builder(binding.root.context)
-                    .setPositiveButton("Редактировать") { _, _ ->
+                    .setPositiveButton(binding.root.context.getString(R.string.edit)) { _, _ ->
 
                     }
-                    .setNegativeButton("Удалить") { dialog, _ ->
+                    .setNegativeButton(binding.root.context.getString(R.string.delete)) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .create()
@@ -112,12 +113,10 @@ class HistoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         ): Boolean {
             return oldItem == newItem
         }
-
     }
 
     companion object {
         const val TYPE_CATEGORY_TABLE_TITLE = 0
         const val TYPE_CATEGORY_TABLE_ITEM = 1
-
     }
 }

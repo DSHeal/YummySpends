@@ -58,7 +58,7 @@
                         android:id="@+id/tv_spending_date_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Date"
+                        android:text="@string/date"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -69,7 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:hint="When did you buy?"
+                        android:hint="@string/when_did_you_buy"
                         android:imeOptions="actionDone"
                         android:padding="3dp" />
                 </LinearLayout>
@@ -86,7 +86,7 @@
                         android:id="@+id/tv_spending_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Title"
+                        android:text="@string/title"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -97,7 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:hint="What did you buy?"
+                        android:hint="@string/what_did_you_buy"
                         android:imeOptions="actionNext"
                         android:padding="3dp" />
                 </LinearLayout>
@@ -113,7 +113,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Cost"
+                        android:text="@string/cost"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -124,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:hint="How much did it cost?"
+                        android:hint="@string/how_much_did_it_cost"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:padding="3dp" />
@@ -151,7 +151,7 @@
                         android:id="@+id/tv_add_category_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Category"
+                        android:text="@string/category_title"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -164,7 +164,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:hint="Enter your category"
+                        android:hint="@string/enter_your_category"
                         android:imeOptions="actionNext"
                         android:padding="3dip"
                         android:visibility="gone"
@@ -182,8 +182,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/tv_single_spending_category" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             </LinearLayout>
 
             <Button
@@ -195,7 +193,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="Add"
+                android:text="@string/add"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

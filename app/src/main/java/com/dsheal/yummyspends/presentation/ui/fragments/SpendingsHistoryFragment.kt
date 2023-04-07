@@ -55,8 +55,9 @@ class SpendingsHistoryFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val userDate: String = if (!spendingsHistoryFragmentArgs.date.isNullOrEmpty()) spendingsHistoryFragmentArgs.date!!
-        else ""
+        val userDate: String =
+            if (!spendingsHistoryFragmentArgs.date.isNullOrEmpty()) spendingsHistoryFragmentArgs.date!!
+            else ""
         viewModel.listenAllSpendingsFromDb()
 
         viewModel.spending.observe(viewLifecycleOwner) { state ->

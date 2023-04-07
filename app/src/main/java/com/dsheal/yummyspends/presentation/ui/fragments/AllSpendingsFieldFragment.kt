@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dsheal.yummyspends.databinding.FragmentAllSpendsBinding
 import com.dsheal.yummyspends.domain.models.spendings.SingleSpendingModel
 import com.dsheal.yummyspends.presentation.adapters.SpendingsListAdapter
-import com.dsheal.yummyspends.presentation.base.BaseViewModel
 import com.dsheal.yummyspends.presentation.viewmodels.AllSpendingsFieldViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,7 +67,7 @@ class AllSpendingsFieldFragment : BaseFragment() {
 
             (binding.rvSpendingsList.adapter as SpendingsListAdapter).updateList(listOf(args!!.spending!!))
             val allPricesList = mutableListOf<Int>()
-           allPricesList.add(args!!.spending!!.spendingPrice)
+            allPricesList.add(args!!.spending!!.spendingPrice)
             binding.tvTotalForSpendList.text = getString(R.string.total_spend, allPricesList.sum())
         } else {
             binding.tlTableHeadingLayout.visibility = View.GONE

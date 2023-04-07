@@ -9,8 +9,8 @@
         android:id="@+id/tb_history_current_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:background="@color/c_E5E6F2"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleMargins="20dp" />
@@ -20,13 +20,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:text="Add spending"
-        android:visibility="visible"
         android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:text="@string/add_spending"
+        android:textSize="12sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/tv_total_sum_for_day"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_total_sum_for_day" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_marginBottom="12dp"
         android:background="@drawable/bcg_subtle_button_rounded_6"
         android:padding="8dp"
-        android:text="345"
+        tools:text="345"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"

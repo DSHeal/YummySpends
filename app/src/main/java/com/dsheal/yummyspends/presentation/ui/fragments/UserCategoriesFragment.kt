@@ -61,7 +61,7 @@ class UserCategoriesFragment : BaseFragment() {
                 )
 
             val dialog = AlertDialog.Builder(requireContext())
-                .setTitle("Добавить категорию")
+                .setTitle(getString(R.string.add_category_title))
                 .setView(editDialogBinding.root)
                 .setCancelable(true)
                 .create()
@@ -70,7 +70,7 @@ class UserCategoriesFragment : BaseFragment() {
 
             val cancelBtn = editDialogBinding.btnEditCategoryDelete
             cancelBtn.apply {
-                text = "Отмена"
+                text = getString(R.string.cancel)
                 setOnClickListener {
                     dialog.dismiss()
                 }
@@ -128,7 +128,6 @@ class UserCategoriesFragment : BaseFragment() {
                 (activity as MainActivity).onBackPressed()
                 return@setOnMenuItemClickListener true
             } else {
-                // if you do nothing, returning false should be appropriate.
                 return@setOnMenuItemClickListener false
             }
         }

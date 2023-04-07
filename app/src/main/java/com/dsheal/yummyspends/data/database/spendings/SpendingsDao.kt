@@ -58,9 +58,4 @@ abstract class SpendingsDao {
             WHERE ${SpendingsEntity.COLUMN_PURCHASE_DATE} = :date
         """
     }
-
-    //может, добавить еще одну таблицу по категориям?
-//    @Query(QUERY_SPENDINGS_BY_CATEGORY_ID)
-//    fun getSpendingsByCategory(categoryId: Long?): Flowable<List<SpendingsEntity>>
-// в аксессуарах ауди есть категории AccessoriesCategory для примера
 }

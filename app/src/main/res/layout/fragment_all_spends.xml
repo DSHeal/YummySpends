@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="Please, add your first spend here"
+            android:text="@string/please_add_your_first_spend_here"
             android:textSize="22sp"
             android:textStyle="bold"
             android:visibility="gone"
@@ -44,14 +44,13 @@
             app:layout_constraintTop_toBottomOf="@+id/home_toolbar">
 
             <TableRow>
-
                 <TextView
                     style="@style/TableHeader"
                     android:layout_width="0dp"
                     android:layout_column="0"
                     android:layout_gravity="start"
                     android:layout_weight="1"
-                    android:text="@string/title_title"
+                    android:text="@string/title"
                     android:textAlignment="textStart" />
 
                 <TextView

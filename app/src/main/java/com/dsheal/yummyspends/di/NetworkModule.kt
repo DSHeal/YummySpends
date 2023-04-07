@@ -1,5 +1,7 @@
 package com.dsheal.yummyspends.di
 
+import com.dsheal.yummyspends.common.Constants.BASE_GOOGLE_SHEETS_URL
+import com.dsheal.yummyspends.common.Constants.YUMMY_SPENDS_FIREBASE_DB_URL
 import com.dsheal.yummyspends.data.network.Api
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
@@ -39,7 +41,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://sheets.googleapis.com")
+            .baseUrl(BASE_GOOGLE_SHEETS_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .build()
@@ -47,7 +49,7 @@ object NetworkModule {
 
     @Provides
     fun provideFirebaseDatabase(): FirebaseDatabase {
-        return Firebase.database("https://yummyspends-default-rtdb.europe-west1.firebasedatabase.app/")
+        return Firebase.database(YUMMY_SPENDS_FIREBASE_DB_URL)
     }
 
     @Provides

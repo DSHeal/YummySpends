@@ -22,6 +22,10 @@ class CategoriesViewModel @Inject constructor(
 ) :
     BaseViewModel() {
 
+    companion object {
+        const val LOG_TAG = "CategoriesVM"
+    }
+
     private var categoriesLiveData = MutableLiveData<State<List<String>>>()
     val categories = categoriesLiveData
 
@@ -31,7 +35,7 @@ class CategoriesViewModel @Inject constructor(
 
     fun sendCategoriesListToRemoteDb(list: ArrayList<String>) {
         viewModelScope.launch(Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
-            Log.d("AddNewSpendVM", throwable.message ?: "")
+            Log.d(LOG_TAG, throwable.message ?: "")
             categoriesLiveData.postValue(State.Failure(throwable))
         }) {
             spendingsRepository.sendCategoriesToRemoteDb(list)
@@ -40,7 +44,7 @@ class CategoriesViewModel @Inject constructor(
 
     fun getCategoriesFromRemoteDb() {
         viewModelScope.launch(Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
-            Log.d("AddNewSpendVM", throwable.message ?: "")
+            Log.d(LOG_TAG, throwable.message ?: "")
             categoriesLiveData.postValue(State.Failure(throwable))
         }) {
             val categoriesFlow = spendingsRepository.getCategoriesListFromFirebase()

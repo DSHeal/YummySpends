@@ -10,8 +10,6 @@ interface SpendingsRepository {
 
     suspend fun getAllDataFromFirebaseDb(): Flow<State<Map<String, Any>>>
 
-    fun listenDataFromFirebaseDbInRealTime(): Flow<State<List<SingleSpendingModel>>>
-
     fun saveSpendingsInDatabase(spending: SingleSpendingModel)
 
     fun getSpendingByIdFromRemoteDb(id: String): Flow<State<Map<String, Any>>>

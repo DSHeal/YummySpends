@@ -57,13 +57,13 @@ class CategoriesListAdapter :
                     adapter.data.submitList(adapter.categoriesList)
                     dialogBuilder.dismiss()
                 }
-
+//TODO implement Delete function
                 val deleteBtn = categoryBinding.btnEditCategoryDelete
                 deleteBtn.setOnClickListener {
                     val confirmationDialog = AlertDialog.Builder(binding.root.context)
                         .setCancelable(true)
                         .setTitle(R.string.delete_confirmation_title)
-                        .setPositiveButton(R.string.delete_agree) { dialog, _ ->
+                        .setPositiveButton(R.string.delete) { dialog, _ ->
                             val itemToDelete = adapter.categoriesList[position]
                             adapter.categoriesList.removeAt(position)
                             val newListAfterDeletion = adapter.categoriesList

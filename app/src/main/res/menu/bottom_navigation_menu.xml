@@ -17,13 +17,13 @@
         android:id="@+id/historyFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_nav_history"
-        android:title="History"
+        android:title="@string/history"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/analyitcsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_bottom_nav_analytics"
-        android:title="Analytics"
+        android:title="@string/analytics"
         app:showAsAction="ifRoom" />
 
 </menu>

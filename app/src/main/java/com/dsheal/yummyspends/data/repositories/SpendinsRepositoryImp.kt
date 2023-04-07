@@ -56,7 +56,7 @@ class SpendinsRepositoryImpl @Inject constructor(
             }
         }
 
-
+//TODO do we need shared prefs? Or can we drop them?
     override suspend fun getAllDataFromFirebaseDb(): Flow<State<Map<String, Any>>> = callbackFlow {
         myRef.get()
             .addOnCompleteListener { task ->
@@ -147,23 +147,6 @@ class SpendinsRepositoryImpl @Inject constructor(
         }
     }
 
-    //TODO probably we don't need it
-    override fun listenDataFromFirebaseDbInRealTime(): Flow<State<List<SingleSpendingModel>>> =
-        callbackFlow {
-            myRef
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val spendings = snapshot.getValue<List<SingleSpendingModel>>()!!
-                        trySend(State.Success<List<SingleSpendingModel>>(spendings)).isSuccess
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.w("spends", "Failed to read value.")
-                        trySend(State.Failure<List<SingleSpendingModel>>(errorMessage = error.message)).isFailure
-                    }
-                })
-        }
-
     override fun sendDataToFirebaseDb(spending: SingleSpendingModel): String? {
         val key = myRef.push().key
         if (key == null) {
@@ -188,10 +171,10 @@ class SpendinsRepositoryImpl @Inject constructor(
         val categories =
             gson.fromJson<Any>(json, type)
 
-        //тут тоже надо тот же трюк с ключом, как и с отдельными тратами
+        //here should be the same trick as with separate spending
 
-        //TODO сделать проверку на идентичность двух списков, и если списки различны - только
-        // тогда отправлять данные в remote Db, а не каждый раз
+        //TODO need to write check for identity 0f two lists, and if they are different -
+        // only then send data to remote db so not to send data each time
 
         firebaseDatabase.reference.child("categories").setValue(categories)
     }

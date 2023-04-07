@@ -18,6 +18,10 @@ class AddNewSpendingViewModel @Inject constructor(
     private val spendingsRepository: SpendingsRepository
 ) : BaseViewModel() {
 
+    companion object {
+        const val LOG_TAG = "AddNewSpendVM"
+    }
+
     private var spendingLiveData = MutableLiveData<State<List<SingleSpendingModel>>>()
 
     val spending = spendingLiveData
@@ -30,7 +34,7 @@ class AddNewSpendingViewModel @Inject constructor(
         spending: SingleSpendingModel
     ) {
         viewModelScope.launch(Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
-            Log.d("AddNewSpendVM", throwable.message ?: "")
+            Log.d(LOG_TAG, throwable.message ?: "")
             spendingLiveData.postValue(State.Failure(throwable))
         }) {
             val key = spendingsRepository.sendDataToFirebaseDb(
@@ -38,7 +42,7 @@ class AddNewSpendingViewModel @Inject constructor(
             )
             spendingFromFbDbWithRemoteId = getSpendingByIdFromRemoteDb(key)
         }.invokeOnCompletion {
-            spendingFromFbDbWithRemoteId?.let { it1 -> saveSpendingInDb(it1) }
+            spendingFromFbDbWithRemoteId?.let { error -> saveSpendingInDb(error) }
         }
     }
 
@@ -52,10 +56,10 @@ class AddNewSpendingViewModel @Inject constructor(
                         Log.i("BY_ID", "ID_FROM_FB = $idFromFb")
                         val value = spending.value as HashMap<String, Any>
                         Log.i("BY_ID", value.toString())
-                        var date: String = ""
-                        var name: String = ""
+                        var date = ""
+                        var name = ""
                         var price: Long = 0
-                        var category: String = ""
+                        var category = ""
                         value.forEach { innerMap ->
                             if (innerMap.key == "purchaseDate") date = innerMap.value as String
                             Log.i("DATE", date.toString())
@@ -63,12 +67,16 @@ class AddNewSpendingViewModel @Inject constructor(
                             Log.i("NAME", name.toString())
                             if (innerMap.key == "spendingPrice") price = innerMap.value as Long
                             Log.i("PRICE", price.toString())
-                            if (innerMap.key == "spendingCategory") category = innerMap.value as String
+                            if (innerMap.key == "spendingCategory") category =
+                                innerMap.value as String
                             Log.i("CATEGORY", category.toString())
                         }
                         val spendingFromRemote = SingleSpendingModel(
-                            id = idFromFb, spendingName = name.toString(),
-                            spendingPrice = price.toInt(), spendingCategory = category, purchaseDate = date
+                            id = idFromFb,
+                            spendingName = name.toString(),
+                            spendingPrice = price.toInt(),
+                            spendingCategory = category,
+                            purchaseDate = date
                         )
                         spend = spendingFromRemote
                     }

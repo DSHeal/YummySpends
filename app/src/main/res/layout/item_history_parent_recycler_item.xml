@@ -28,8 +28,8 @@
                 android:layout_gravity="start"
                 android:layout_weight="1"
                 android:gravity="start"
-                android:hint="Овощи"
-                android:padding="3dip" />
+                android:padding="3dip"
+                tools:hint="Овощи" />
 
             <TextView
                 android:id="@+id/tv_history_category_sum"
@@ -38,9 +38,8 @@
                 android:layout_gravity="start"
                 android:layout_weight="1"
                 android:gravity="start"
-                android:hint="234"
-                android:padding="3dip" />
-
+                android:padding="3dip"
+                tools:hint="234" />
         </TableRow>
     </TableLayout>
 
